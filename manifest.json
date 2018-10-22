@@ -1,0 +1,35 @@
+{
+  "name": "JaneLiquidation",
+  "description": "Auction winner",
+  "version": "1.0",
+  "manifest_version": 2,
+  "icons": {
+    "128": "logo.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [ "*://www.liquidation.com/*" ],
+      "js": [ "jquery.min.js","main.js"],
+      "css": [ "style.css" ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "background":
+  {
+    "scripts": ["jquery.min.js", "background.js"]
+  },
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "declarativeContent"
+  ],
+  "browser_action": {
+    "default_title": "JaneLiquidation",
+    "default_icon": "logo.png",
+    "default_popup": "popup.html"
+  },
+  "web_accessible_resources": [
+    "main.js"
+  ]
+}

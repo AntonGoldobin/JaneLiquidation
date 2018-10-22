@@ -1,0 +1,70 @@
+@font-face {
+    font-family: 'Montserrat';
+    src: url("Montserrat-Regular.ttf");
+}
+
+body{
+    background: white;
+    font-family: 'Montserrat', sans-serif;
+}
+.modal-header{
+    display: flex;
+    padding-left: 21px;
+    padding-right: 21px;
+    flex-direction: column;
+    padding-top: 8px;
+    width: 238px;
+    height: 315px;
+    background: white;
+    position: relative;
+}
+.test-div{
+    width: 280px;
+    height: 315px;
+    background: white;
+}
+.circle{
+    width: 178px;
+    height: 178px;
+    border-radius: 100px;
+    background: #FBE42C;
+    position: absolute;
+    top: -89px;
+    right: -89px;
+}
+.logo-icon{
+    height: 36px;
+    width: 36px;
+    margin-right: 8px;
+}
+.row-flex{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+h1{
+    font-size: 15px;
+}
+.modal-input{
+    font-family: 'Montserrat', sans-serif;
+    justify-content: center;
+    height: 22px;
+    margin-top: 8px;
+}
+label{
+    margin-top: 36px;
+    font-size: 8px;
+}
+.active-btn{
+    font-family: 'Montserrat';
+    margin-top: 36px;
+    background: #FBE42C;
+    border-radius: 50px;
+    border: none;
+    color: #535353;
+    box-shadow: 0 2px 6px 0 #FBE42C;
+    height: 30px;
+    width: 127px;
+    
+}
