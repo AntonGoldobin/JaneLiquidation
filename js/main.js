@@ -1,25 +1,34 @@
-'use strict';
+//if 'start' is true - scripts will work
+var start = false;
 
-var script=document.createElement('script');
-script.type='text/javascript';
-script.src=chrome.extension.getURL("main.js");
+//step for next bids
+//STEPS WILL NOT WORK WHEN BET HIGHER THAN 1k
+var step = 10;
 
-function click(e) {
-    chrome.tabs.executeScript(null,
-        {code:"document.body.style.backgroundColor='" + e.target.id + "'"});
-    window.close();
-}
-document.addEventListener('DOMContentLoaded', function () {
-    var divs = document.querySelectorAll('div');
-    for (var i = 0; i < divs.length; i++) {
-        divs[i].addEventListener('click', click);
+//Check which pages is open
+if(start === true){
+    var firstPage = $("#auctionData.col-sm-6").length;
+    var secondPage = $("#selectShippingAddressType").length;
+    if(firstPage === 1){
+        console.log ("auction page is found");
+        bidPage(step);
     }
-});
-console.log("scripts");
-
-function partA() {
+    else if (secondPage === 1){
+        console.log ("adress page is found");
+        acceptBid();
+    }
+    else{
+        console.log("it is not lot page for JaneLiquidation")
+    }
+}
+else{
+    console.log("JaneLiquidation is turn off")
+}
+//functions for find current bid, bid more and going to next page
+function bidPage() {
     var parentDOM = document.getElementById("auctionData").getElementsByClassName('auctionview_upper')[1].innerText;
     var price = Number(parentDOM.slice(13,16)) + step;
+    console.log(price);
     binding(price);
 }
 function binding(price) {
@@ -30,7 +39,13 @@ function binding(price) {
     document.addEventListener("DOMContentLoaded", function() {
         setTimeout(function() { document.getElementsByClassName("btn-warning")[0].click();
         });
-    })}
+    })
+}
+//function for pick adress and bid
+function acceptBid() {
+    $(".panel-default input").first().delay( 2000 ).click();
+    $(".btn-warning").delay( 2000 ).click()
+}
 
 
 
