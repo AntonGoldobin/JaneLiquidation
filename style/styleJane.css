@@ -1,13 +1,12 @@
 @font-face {
     font-family: 'Montserrat';
-    src: url("Montserrat-Regular.ttf");
+    src: url("../assets/Montserrat-Regular.ttf");
 }
-
 body{
     background: white;
     font-family: 'Montserrat', sans-serif;
 }
-.modal-header{
+#jane .modal-header{
     display: flex;
     padding-left: 21px;
     padding-right: 21px;
@@ -23,7 +22,7 @@ body{
     height: 315px;
     background: white;
 }
-.circle{
+#jane .circle{
     width: 178px;
     height: 178px;
     border-radius: 100px;
@@ -32,31 +31,31 @@ body{
     top: -89px;
     right: -89px;
 }
-.logo-icon{
+#jane .logo-icon{
     height: 36px;
     width: 36px;
     margin-right: 8px;
 }
-.row-flex{
+#jane .row-flex{
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
 }
-h1{
+#jane h1{
     font-size: 15px;
 }
-.modal-input{
+#jane .modal-input{
     font-family: 'Montserrat', sans-serif;
     justify-content: center;
     height: 22px;
     margin-top: 8px;
 }
-label{
+#jane label{
     margin-top: 36px;
     font-size: 8px;
 }
-.active-btn{
+#jane .active-btn{
     font-family: 'Montserrat';
     margin-top: 36px;
     background: #FBE42C;
@@ -66,5 +65,5 @@ label{
     box-shadow: 0 2px 6px 0 #FBE42C;
     height: 30px;
     width: 127px;
-    
+
 }

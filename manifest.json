@@ -4,20 +4,20 @@
   "version": "1.0",
   "manifest_version": 2,
   "icons": {
-    "128": "logo.png"
+    "128": "assets/logo.png"
   },
   "content_scripts": [
     {
       "matches": [ "*://www.liquidation.com/*" ],
-      "js": [ "jquery.min.js","main.js"],
-      "css": [ "style.css" ],
+      "js": [ "library/jquery.min.js","js/main.js"],
+      "css": [ "style/styleJane.css" ],
       "run_at": "document_end",
       "all_frames": true
     }
   ],
   "background":
   {
-    "scripts": ["jquery.min.js", "background.js"]
+    "scripts": ["library/jquery.min.js", "js/background.js"]
   },
   "permissions": [
     "tabs",
@@ -26,10 +26,10 @@
   ],
   "browser_action": {
     "default_title": "JaneLiquidation",
-    "default_icon": "logo.png",
-    "default_popup": "popup.html"
+    "default_icon": "assets/logo.png",
+    "default_popup": "view/popup.html"
   },
   "web_accessible_resources": [
-    "main.js"
+    "js/main.js"
   ]
 }
