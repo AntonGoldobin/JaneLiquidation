@@ -9,7 +9,7 @@
   "content_scripts": [
     {
       "matches": [ "*://www.liquidation.com/*" ],
-      "js": [ "library/jquery.min.js","js/main.js"],
+      "js": [ "library/jquery.min.js", "library/timer.js","js/main.js"],
       "css": [ "style/styleJane.css" ],
       "run_at": "document_end",
       "all_frames": true
@@ -17,7 +17,7 @@
   ],
   "background":
   {
-    "scripts": ["library/jquery.min.js", "js/background.js"]
+    "scripts": ["library/jquery.min.js", "library/timer.js","js/background.js"]
   },
   "permissions": [
     "tabs",
