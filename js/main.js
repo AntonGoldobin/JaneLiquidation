@@ -1,14 +1,31 @@
 //if 'start' is true - scripts will work
-var start = false;
+var start = true;
+
+//Starting script when find second adress page and check what its work only once
+secondPageCheck();
+function secondPageCheck(){
+    if (getCookie("AuctionSecondPage") === "true"){
+        console.log("Cookie is found");
+        acceptBid();
+        setCookie("AuctionSecondPage", "false");
+    }
+}
 //MVP Menu
 var el = document.createElement('div');
 var domString =
     '<div class="container" style="position: fixed;top: 70px;right: 0;height: 500px;width: 130px;background: #ffffff; border: solid 1px #efefef;">' +
-    '<input/><button id="Anton">On/Off</button></div>';
+    '<input id="minuteTimer"/><input type="checkbox" checked="checked" id="onoff">On/Off</input><button id="start">Start</button></div>';
 el.innerHTML =  domString;
 document.body.appendChild(el.firstChild);
+
+//STEPS WILL NOT WORK WHEN BET HIGHER THAN 1k
+var bid = 750;
+//Start bot
+$('#start').click(function(){
+    botStart();
+});
 //Check menu events
-$('#Anton').click(function(){
+$('#onoff').click(function(){
    if(start === false){
        start = true;
        console.log("JaneLiquidation is turn ON");
@@ -19,51 +36,50 @@ $('#Anton').click(function(){
    }
 });
 
-//'Timer for bid in minutes
-var minutesTimer = 1/3;
-//STEPS WILL NOT WORK WHEN BET HIGHER THAN 1k
-var bid = 0;
-
 //Check which pages is open
-if(start === true){
-    var firstPage = $("#auctionData.col-sm-6").length;
-    var secondPage = $("#selectShippingAddressType").length;
-    if(firstPage === 1){
-        console.log ("auction page is found");
-        //Timer
-        var lotTime = minutesTimer * 60 * 1000;
-        var timeYet = lotTime;
-        var timer = new Timer(1000);
-        timer.bind(lotTime, function () {
-            bidPage(bid);
-        });
-        timer.start();
-        var timerCheck =  new Timer(1000);
-        timerCheck.bind(3000, function(){
-            timeYet = timeYet - 3000;
-            if(timeYet >= 0){
-                console.log(timeYet/1000 + " seconds")
-            }
-            else{
-                console.log('done');
-                timerCheck.stop();
-                timer.stop();
-            }
-        });
-        timerCheck.start();
-    }
-    else if (secondPage === 1){
-        console.log ("adress page is found");
-        acceptBid();
+function botStart(){
+    if(start === true){
+        var minutesTimer =$("#minuteTimer").val();
+        console.log(minutesTimer);
+        var firstPage = $("#auctionData.col-sm-6").length;
+        var secondPage = $("#selectShippingAddressType").length;
+        if(firstPage === 1){
+            console.log ("auction page is found");
+            //Timer
+            var lotTime = minutesTimer * 1000;
+            var timeYet = lotTime;
+            var timer = new Timer(1000);
+            timer.bind(lotTime, function () {
+                setCookie("AuctionSecondPage", "true");
+                bidPage(bid);
+            });
+            timer.start();
+            var timerCheck =  new Timer(1000);
+            timerCheck.bind(3000, function(){
+                timeYet = timeYet - 3000;
+                if(timeYet >= 0){
+                    console.log(timeYet/1000 + " seconds")
+                }
+                else{
+                    console.log('done');
+                    timerCheck.stop();
+                    timer.stop();
+                }
+            });
+            timerCheck.start();
+        }
+        else if (secondPage === 1){
+            console.log ("address page is found");
+        }
+        else{
+            console.log("it is not a lot page for JaneLiquidation")
+        }
     }
     else{
-        console.log("it is not lot page for JaneLiquidation")
+        console.log("JaneLiquidation is turn off")
     }
 }
-else{
-    console.log("JaneLiquidation is turn off")
-}
-//functions for find current bid, bid more and going to next page
+//functions for find current bid
 function bidPage() {
     //var parentDOM = document.getElementById("auctionData").getElementsByClassName('auctionview_upper')[1].innerText;
     //var price = Number(parentDOM.slice(13,16)) + step;
@@ -71,6 +87,7 @@ function bidPage() {
     console.log(price);
     binding(price);
 }
+//for bid more and going to next page
 function binding(price) {
     document.getElementById('bidAmount').value = price;
     setTimeout(function() {
@@ -85,9 +102,30 @@ function binding(price) {
 function acceptBid() {
     var addressRadio = $(".panel-default input")[1];
     addressRadio.click();
-    setTimeout(bidAfterDelay, 30000);
+    setTimeout(bidAfterDelay, 6000);
     function bidAfterDelay(){
         $(".btn-warning").click()
     }
 }
 
+// SetCookie
+function setCookie(cname, prop) {
+    document.cookie = cname + "=" + prop + ";";
+}
+
+// GetCookie
+function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for(var i = 0; i <ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
