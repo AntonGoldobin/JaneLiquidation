@@ -46,7 +46,7 @@ function botStart(){
         if(firstPage === 1){
             console.log ("auction page is found");
             //Timer
-            var lotTime = minutesTimer * 1000;
+            var lotTime = minutesTimer * 60 * 1000;
             var timeYet = lotTime;
             var timer = new Timer(1000);
             timer.bind(lotTime, function () {
