@@ -13,13 +13,17 @@ function secondPageCheck(){
 //MVP Menu
 var el = document.createElement('div');
 var domString =
-    '<div class="container" style="position: fixed;top: 70px;right: 0;height: 500px;width: 130px;background: #ffffff; border: solid 1px #efefef;">' +
-    '<input id="minuteTimer"/><input type="checkbox" checked="checked" id="onoff">On/Off</input><button id="start">Start</button></div>';
+    '<div class="container" id="janeMVP">' +
+    '<span class="title">JaneLiquidation</span>' +
+    '<input type="checkbox" class="checkboxJane" checked="checked" id="onoff"/>On/Off</br>' +
+    '<input id="minuteTimer" type="number" placeholder="minutes to bid"/>' +
+    '<input id="bid" type="number" placeholder="your bid"/>' +
+    '<button id="start">Start</button></div>';
 el.innerHTML =  domString;
 document.body.appendChild(el.firstChild);
 
 //STEPS WILL NOT WORK WHEN BET HIGHER THAN 1k
-var bid = 750;
+var bid = $("#bid").val();
 //Start bot
 $('#start').click(function(){
     botStart();
