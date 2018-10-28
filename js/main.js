@@ -18,10 +18,14 @@ var domString =
     '<input type="checkbox" class="checkboxJane" checked="checked" id="onoff"/>On/Off</br>' +
     '<input id="minuteTimer" type="number" placeholder="minutes to bid"/>' +
     '<input id="bid" type="number" placeholder="your bid"/>' +
-    '<button id="start">Start</button></div>';
+    '<button id="start">Start</button>' +
+    '<button id="remove">remove cookie</button></div>';
 el.innerHTML =  domString;
 document.body.appendChild(el.firstChild);
-
+//Remove cookie
+$('#remove').click(function(){
+    document.cookie = "AuctionSecondPage=;"
+});
 //STEPS WILL NOT WORK WHEN BET HIGHER THAN 1k
 var bid = $("#bid").val();
 //Start bot
