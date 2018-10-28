@@ -109,10 +109,17 @@ body{
     color: #535353;
     box-shadow: 0 2px 6px 0 #FBE42C;
     transition: 0.5s;
+    margin-bottom: 10px;
+    cursor: pointer;
 }
 #janeMVP button:hover{
     background: #fbd738;
     transition: 0.5s;
+}
+#janeMVP a{
+    color: #c2c2c2;
+    font-size: 12px;
+    cursor: pointer;
 }
 #janeMVP ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
     color: #c2c2c2;

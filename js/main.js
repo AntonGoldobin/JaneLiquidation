@@ -1,15 +1,5 @@
 //if 'start' is true - scripts will work
 var start = true;
-
-//Starting script when find second adress page and check what its work only once
-secondPageCheck();
-function secondPageCheck(){
-    if (getCookie("AuctionSecondPage") === "true"){
-        console.log("Cookie is found");
-        acceptBid();
-        setCookie("AuctionSecondPage", "false");
-    }
-}
 //MVP Menu
 var el = document.createElement('div');
 var domString =
@@ -19,15 +9,26 @@ var domString =
     '<input id="minuteTimer" type="number" placeholder="minutes to bid"/>' +
     '<input id="bid" type="number" placeholder="your bid"/>' +
     '<button id="start">Start</button>' +
-    '<button id="remove">remove cookie</button></div>';
+    '<a id="remove">remove cookie</a></div>';
 el.innerHTML =  domString;
 document.body.appendChild(el.firstChild);
+
 //Remove cookie
-$('#remove').click(function(){
-    document.cookie = "AuctionSecondPage=;"
+$("#remove").click(function(){
+    setCookie("AuctionSecondPage", "false");
+    console.log("Cookies was cleared")
 });
-//STEPS WILL NOT WORK WHEN BET HIGHER THAN 1k
-var bid = $("#bid").val();
+
+//Starting script when find second address page and check what its work only once
+secondPageCheck();
+function secondPageCheck(){
+    if (getCookie("AuctionSecondPage") === "true"){
+        console.log("Cookie is found");
+        acceptBid();
+        setCookie("AuctionSecondPage", "false");
+    }
+}
+
 //Start bot
 $('#start').click(function(){
     botStart();
@@ -48,7 +49,8 @@ $('#onoff').click(function(){
 function botStart(){
     if(start === true){
         var minutesTimer =$("#minuteTimer").val();
-        console.log(minutesTimer);
+        //STEPS WILL NOT WORK WHEN BET HIGHER THAN 1k
+        var bid = $("#bid").val();
         var firstPage = $("#auctionData.col-sm-6").length;
         var secondPage = $("#selectShippingAddressType").length;
         if(firstPage === 1){
@@ -88,9 +90,7 @@ function botStart(){
     }
 }
 //functions for find current bid
-function bidPage() {
-    //var parentDOM = document.getElementById("auctionData").getElementsByClassName('auctionview_upper')[1].innerText;
-    //var price = Number(parentDOM.slice(13,16)) + step;
+function bidPage(bid) {
     var price = bid;
     console.log(price);
     binding(price);
@@ -109,8 +109,15 @@ function binding(price) {
 //function for pick address and bid
 function acceptBid() {
     var addressRadio = $(".panel-default input")[1];
-    addressRadio.click();
-    setTimeout(bidAfterDelay, 6000);
+    if(addressRadio === 1){
+        addressRadio.click();
+        console.log("bid after 6 sec");
+        setTimeout(bidAfterDelay, 6000);
+    }
+    else{
+        console.log("bid after 6 sec");
+        setTimeout(bidAfterDelay, 6000);
+    }
     function bidAfterDelay(){
         $(".btn-warning").click()
     }
